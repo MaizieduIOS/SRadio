@@ -198,23 +198,30 @@ class SRPlayerViewController: UIViewController, HttpProtocol, SRChannelProtocol,
                 } else {
                     self.mPlayProgressBar.setProgress(CFloat(percentage) * 0.01, animated: true)
 
-                    let all:Int = Int(elapsedTime)
-                    let m:Int = all%60
-                    let f:Int = Int(all/60)
-                    var time:String = ""
-                    //小时
-                    if f<10{
-                        time = "0\(f):"
-                    }else{
-                        time = "\(f):"
+                    func generateString(time:CGFloat) -> String {
+                        if !time.isNaN {
+                            let all:Int = Int(time)
+                            let m:Int = all%60
+                            let f:Int = Int(all/60)
+                            var time:String = ""
+                            //小时
+                            if f<10{
+                                time = "0\(f):"
+                            }else{
+                                time = "\(f):"
+                            }
+                            // 分钟
+                            if m<10{
+                                time += "0\(m)"
+                            }else{
+                                time += "\(m)"
+                            }
+                            return time
+                        } else {
+                            return "00:00"
+                        }
                     }
-                    // 分钟
-                    if m<10{
-                        time += "0\(m)"
-                    }else{
-                        time += "\(m)"
-                    }
-//                    self.mTimeBar.text = self.generateString(elapsedTime) + " / " + self.generateString(timeRemaining)
+                    self.mTimeBar.text = generateString(elapsedTime) + " / " + generateString(timeRemaining)
                     
                     if self.mIsLRCPrepared {
                         self.updateLRC(elapsedTime)
