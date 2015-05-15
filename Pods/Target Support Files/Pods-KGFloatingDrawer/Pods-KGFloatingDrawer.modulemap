@@ -1,0 +1,6 @@
+framework module KGFloatingDrawer {
+  umbrella header "Pods-KGFloatingDrawer-umbrella.h"
+
+  export *
+  module * { export * }
+}
