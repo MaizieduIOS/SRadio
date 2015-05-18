@@ -47,6 +47,7 @@ class SRPlayerViewController: UIViewController, HttpProtocol, SRChannelProtocol,
     
     private let mSongListUrl : String = "http://www.douban.com/j/app/radio/people?app_name=radio_desktop_win&version=100&type=n&channel="
     private let mLyricUrl : String = "http://geci.me/api/lyric/"
+//    private let mLyricUrl : String = "http://mp3.baidu.com/dev/api/?tn=getinfo&ct=0&word=小苹果&ie=utf-8&format=json"
     
     private var mCurrentSongIndex = 0
     private var mUpdateTimer : NSTimer?
@@ -247,7 +248,7 @@ class SRPlayerViewController: UIViewController, HttpProtocol, SRChannelProtocol,
         
         AFSoundManager.sharedManager().pause()
         
-        self.mPlayingStatus = PlayStatus.STOP
+        self.mPlayingStatus = PlayStatus.PAUSE
     }
     
     func resume() {
@@ -317,6 +318,7 @@ class SRPlayerViewController: UIViewController, HttpProtocol, SRChannelProtocol,
         //Stop Play
         AFSoundManager.sharedManager().stop()
         self.mPlayingStatus = PlayStatus.STOP
+        self.mSongsArray.removeAll(keepCapacity: false)
         
         //Clear View
         self.mAlbumImageView.stopRotate()
